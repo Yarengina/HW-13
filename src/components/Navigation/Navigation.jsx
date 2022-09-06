@@ -6,13 +6,10 @@ function Navigation() {
     return (
         <nav className='LinkField'>
             <NavLink className='Link' to="/">
-                <span>Home</span>
+                <span>Login</span>
             </NavLink>
             <NavLink className='Link' to="/about">
                 <span>About</span>
-            </NavLink>
-            <NavLink className='Link' to="/login">
-                <span>Login</span>
             </NavLink>
             <NavLink className='Link' to="/order">
                 <span>Order</span>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Counter from './Counter'
 
 function OrderDetail({
@@ -9,8 +10,11 @@ function OrderDetail({
             {books.map(({id, title, price, rest, quantity}) => (
             <div className='Book' key={id}>
                 <p className='Title'>{title}</p>
-                <p className='Price'>Price: {price} /-</p>
-                <p className='Price'>Quantity: {quantity - 1}</p>
+                <p className='Price'>{price}</p>
+                <Link className='ReadMoreLink'
+                    to={`${id}`}>
+                    Read more
+                </Link>
                 <Counter
                     min={1}
                     max={rest + 1}
