@@ -1,10 +1,10 @@
 import { useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { validEmail, passwordLength } from '../../components/constants'
 import useCheckInput from '../../components/useCheckInput'
 import UserInfoContext from '../../contexts/UserInfoContext'
 import './LoginPass.css'
 import Navigation from '../../components/Navigation/Navigation'
+import validateLoginPass from './validateLoginPass'
 
 function LoginPass() {
     const { inputValue, onChange, onBlur, isEmailError, isPassError } = useCheckInput('')
@@ -38,7 +38,7 @@ function LoginPass() {
             return
         }
         
-        if (userEmail.match(validEmail) && userPassword.length >= passwordLength) {
+        if (validateLoginPass(userEmail, userPassword)) {
             navigate('/order')
             setUser({
                 ...user,

@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import './App.css'
 import Routes from './Routes'
 import UserInfoContext from './contexts/UserInfoContext'
@@ -16,10 +15,13 @@ function App() {
         quantity: null,
         price: null,
     })
+
+    const valueUser = useMemo(() => ({user, setUser}))
+    const valueOrder = useMemo(() => ({order, setOrder}))
     
     return (
-        <UserInfoContext.Provider value={{user, setUser}}>
-			<OrderInfoContext.Provider value={{order, setOrder}}>
+        <UserInfoContext.Provider value={valueUser}>
+			<OrderInfoContext.Provider value={valueOrder}>
                 <div className='App'>
                     <Routes />
                 </div>
