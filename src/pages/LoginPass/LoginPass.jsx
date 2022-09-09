@@ -1,10 +1,17 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import useCheckInput from '../../components/useCheckInput'
+import UserInfoContext from '../../contexts/UserInfoContext'
 import './LoginPass.css'
 import Navigation from '../../components/Navigation/Navigation'
+import validateLoginPass from './validateLoginPass'
 
 function LoginPass() {
     const { inputValue, onChange, onBlur, isEmailError, isPassError } = useCheckInput('')
+
+    const {user, setUser} = useContext(UserInfoContext)
+    
+    const navigate = useNavigate()
 
     const inputEmail = useRef(null)
     const inputPassword = useRef(null)
@@ -16,21 +23,33 @@ function LoginPass() {
     }
 
     const handleClick = () => {
-        if (inputEmail.current.name === 'email' && inputEmail.current.value === '') {
+        const userEmail = inputEmail.current.value
+        const userPassword = inputPassword.current.value
+
+        if (inputEmail.current.name === 'email' && userEmail === '') {
             inputEmail.current.focus()
             emailError.current.innerText = 'Type your e-mail'
+            return
         }
 
-        if (inputPassword.current.name === 'password' && inputPassword.current.value === '') {
+        if (inputPassword.current.name === 'password' && userPassword === '') {
             inputPassword.current.focus()
             passwordError.current.innerText = 'Type your password'
+            return
+        }
+        
+        if (validateLoginPass(userEmail, userPassword)) {
+            navigate('/order')
+            setUser({
+                ...user,
+                email: userEmail
+            })
         }
     }
    
     return (
         <div>
             <Navigation />
-            <h2>Авторизация</h2>
             <form className='Form' onSubmit={onSubmit}>
                 <div className='Inputs'>
                     <input className='Input'
@@ -59,7 +78,7 @@ function LoginPass() {
                     <span className='Error' ref={passwordError}>{isPassError}</span>
                 </div>
                 <button className='Button' type='button' onClick={handleClick}>
-                Submit
+                Log in
                 </button>
             </form>
         </div>

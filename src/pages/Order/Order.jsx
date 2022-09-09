@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import OrderDetail from './OrderDetail'
+import OrderInfoContext from '../../contexts/OrderInfoContext'
 import booksStub from '../../components/booksStub'
 import './Order.css'
 import Navigation from '../../components/Navigation/Navigation'
 
 function Order() {
     const [books, setBooks] = useState(booksStub())
+    const {order, setOrder} = useContext(OrderInfoContext)
+
+    const navigate = useNavigate()
+
     const totalPrice = books.reduce(
         (total, currentBook) => 
         total + currentBook.price * (currentBook.quantity - 1), 0
@@ -22,18 +28,28 @@ function Order() {
         )
     }
 
+    const handleReady = () => {
+        setOrder({
+            ...order,
+            quantity: totalQuantity,
+            price: totalPrice,
+        })
+        navigate('/order/user_order')
+    }
+
     return (
         <>
         <Navigation />
-            <h2>Каталог книг</h2>
             <OrderDetail
                 books={books}
                 setQuantity={setQuantity}
             />
-            <p className='Total'>Total Quantity: <strong>{totalQuantity}</strong></p>
-            <p className='Total'>Total Price: <strong>{totalPrice} /-</strong></p>
+            <button className='ButtonReady' 
+                type='button'
+                onClick={handleReady}>Ready
+            </button>
         </>
     )
-  }
+}
   
 export default Order

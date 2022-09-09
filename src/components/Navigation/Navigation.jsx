@@ -4,17 +4,14 @@ import './Navigation.css'
 
 function Navigation() {
     return (
-        <nav className='LinkField'>
-            <NavLink className='Link' to="/">
-                <span>Home</span>
-            </NavLink>
-            <NavLink className='Link' to="/about">
-                <span>About</span>
-            </NavLink>
-            <NavLink className='Link' to="/login">
+        <nav className="LinkField">
+            <NavLink className="Link" to="/">
                 <span>Login</span>
             </NavLink>
-            <NavLink className='Link' to="/order">
+            <NavLink className="Link" to="/about">
+                <span>About</span>
+            </NavLink>
+            <NavLink className="Link" to="/order">
                 <span>Order</span>
             </NavLink>
         </nav>
