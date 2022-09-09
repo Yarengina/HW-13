@@ -12,16 +12,22 @@ function BookDesc() {
     const goBack = () => {
         navigate('/order')
     }
-    
+
     return (
-        <div className='BookDesc'>
-            <p>Книга: <strong>{searcBook.title}</strong></p>
-            <p className='Description'>Описание: 
-            <br/><strong>{searcBook.description}</strong></p>
-            <p>Цена: <strong>{searcBook.price} руб.</strong></p>
-            <button className='ButtonBack' 
-                type='button'
-                onClick={goBack}>Back
+        <div className="BookDesc">
+            <p>
+                Книга: <strong>{searcBook.title}</strong>
+            </p>
+            <p className="Description">
+                Описание:
+                <br />
+                <strong>{searcBook.description}</strong>
+            </p>
+            <p>
+                Цена: <strong>{searcBook.price} руб.</strong>
+            </p>
+            <button className="ButtonBack" type="button" onClick={goBack}>
+                Back
             </button>
         </div>
     )
